@@ -3,365 +3,219 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive Pre-Algebra Infographic</title>
+<title>Why This Math Matters</title>
 
 <style>
-  :root {
-    --bg: #0f172a;
-    --card-back: #1e293b;
-    --accent: #38bdf8;
-    --accent-2: #facc15;
-    --text: #f8fafc;
-    --muted: #cbd5e1;
+:root {
+  --bg: #0f172a;
+  --accent: #38bdf8;
+  --accent-2: #facc15;
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #111827);
+  color: var(--text);
+  padding: 18px;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  background: linear-gradient(135deg, #1e3a8a, #1e40af);
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 18px;
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 2.8rem;
+}
+
+.subtitle {
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* FLIP CARD */
+.flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  transition: transform 0.7s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+/* FRONT + BACK */
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* FRONT (image only) */
+.front {
+  background: #000;
+}
+
+.front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* BACK (text only) */
+.back {
+  transform: rotateY(180deg);
+  background: #1e293b;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 3px solid var(--accent);
+  overflow-y: auto;
+}
+
+.back h2 {
+  margin: 0 0 10px;
+  color: var(--accent-2);
+  font-size: 1.4rem;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.back p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  * {
-    box-sizing: border-box;
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
-
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: radial-gradient(circle at top, #1e3a8a, var(--bg) 55%);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 24px;
-  }
-
-  header {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto 26px;
-  }
-
-  h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    margin: 0 0 10px;
-  }
-
-  .subtitle {
-    color: var(--muted);
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    line-height: 1.5;
-  }
-
-  .hint {
-    display: inline-block;
-    margin-top: 14px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: rgba(56, 189, 248, 0.15);
-    color: #bfdbfe;
-    border: 1px solid rgba(56, 189, 248, 0.35);
-    font-weight: bold;
-  }
-
-  .infographic-grid {
-    max-width: 1500px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 14px;
-  }
-
-  .flip-card {
-    perspective: 1200px;
-    cursor: pointer;
-    min-height: 250px;
-    border-radius: 22px;
-    outline: none;
-  }
-
-  .top-card {
-    grid-column: span 2;
-    aspect-ratio: 1 / 1;
-  }
-
-  .bottom-left {
-    grid-column: span 3;
-    aspect-ratio: 720 / 256;
-  }
-
-  .bottom-right {
-    grid-column: span 3;
-    aspect-ratio: 816 / 256;
-  }
-
-  .flip-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.75s ease;
-    transform-style: preserve-3d;
-  }
-
-  .flip-card.flipped .flip-inner {
-    transform: rotateY(180deg);
-  }
-
-  .front,
-  .back {
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    transform: rotateY(180deg);
-    padding: clamp(22px, 3vw, 36px);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border: 3px solid var(--accent);
-    overflow-y: auto;
-  }
-
-  .front {
-    background-image: url('a_bright_educational_infographic_poster_composed.png');
-    background-repeat: no-repeat;
-    border: 3px solid rgba(255,255,255,0.18);
-  }
-
-  .front::after {
-    content: "Click to flip";
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(15, 23, 42, 0.08);
-    color: white;
-    font-size: clamp(1rem, 2vw, 1.4rem);
-    font-weight: bold;
-    text-shadow: 0 2px 8px black;
-    opacity: 0;
-    transition: opacity 0.25s ease, background 0.25s ease;
-  }
-
-  .flip-card:hover .front,
-  .flip-card:focus-visible .front {
-    border-color: var(--accent-2);
-    box-shadow: 0 0 0 5px rgba(250, 204, 21, 0.28), 0 18px 35px rgba(0,0,0,0.5);
-  }
-
-  .flip-card:hover .front::after,
-  .flip-card:focus-visible .front::after {
-    opacity: 1;
-    background: rgba(15, 23, 42, 0.32);
-  }
-
-  /* Exact crop positions for the 1536 x 768 infographic */
-  .gaming .front {
-    background-size: 300% 150%;
-    background-position: 0% 0%;
-  }
-
-  .sports .front {
-    background-size: 300% 150%;
-    background-position: 50% 0%;
-  }
-
-  .shopping .front {
-    background-size: 300% 150%;
-    background-position: 100% 0%;
-  }
-
-  .cooking .front {
-    background-size: 213.333% 300%;
-    background-position: 0% 100%;
-  }
-
-  .technology .front {
-    background-size: 188.235% 300%;
-    background-position: 100% 100%;
-  }
-
-  .back {
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    transform: rotateY(180deg);
-    padding: clamp(18px, 3vw, 32px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: 3px solid var(--accent);
-  }
-
-  .back h2 {
-    margin: 0 0 12px;
-    color: var(--accent-2);
-    font-size: clamp(1.5rem, 3vw, 2.35rem);
-    line-height: 1.2;
-    word-break: break-word;
-  }
-
-  .back p {
-    margin: 0;
-    color: #e2e8f0;
-    font-size: clamp(1rem, 1.6vw, 1.2rem);
-    line-height: 1.65;
-  }
-
-  .back .tap-back {
-    margin-top: 18px;
-    color: #93c5fd;
-    font-size: 0.95rem;
-    font-weight: bold;
-  }
-
-  footer {
-    text-align: center;
-    color: #94a3b8;
-    margin-top: 32px;
-    font-size: 0.95rem;
-  }
-
-  @media (max-width: 900px) {
-    body {
-      padding: 18px;
-    }
-
-    .infographic-grid {
-      grid-template-columns: 1fr;
-      gap: 18px;
-    }
-
-    .top-card,
-    .bottom-left,
-    .bottom-right {
-      grid-column: span 1;
-      aspect-ratio: 16 / 10;
-      min-height: 280px;
-    }
-
-    .gaming .front {
-      background-size: 300% 150%;
-      background-position: 0% 0%;
-    }
-
-    .sports .front {
-      background-size: 300% 150%;
-      background-position: 50% 0%;
-    }
-
-    .shopping .front {
-      background-size: 300% 150%;
-      background-position: 100% 0%;
-    }
-
-    .cooking .front {
-      background-size: 213.333% 300%;
-      background-position: 0% 100%;
-    }
-
-    .technology .front {
-      background-size: 188.235% 300%;
-      background-position: 100% 100%;
-    }
-
-    .front::after {
-      opacity: 1;
-      align-items: flex-end;
-      padding-bottom: 18px;
-      background: linear-gradient(to bottom, rgba(15,23,42,0), rgba(15,23,42,0.45));
-    }
-  }
-
-  @media (max-width: 520px) {
-    .top-card,
-    .bottom-left,
-    .bottom-right {
-      min-height: 245px;
-      aspect-ratio: 1 / 1;
-    }
-
-    .back {
-      padding: 18px;
-    }
-
-    .back p {
-      font-size: 0.98rem;
-      line-height: 1.5;
-    }
-  }
+}
 </style>
 </head>
+
 <body>
 
-<header>
-  <h1>Why Pre-Algebra Matters</h1>
-  <p class="subtitle">Click each part of the infographic to reveal how integers, fractions, mixed numbers, rational numbers, number lines, and order of operations show up in real life.</p>
-  <div class="hint">Hover or tap a section, then click to flip it.</div>
-</header>
+<div class="wrapper">
+  <header>
+    <h1>Why This Math Matters</h1>
+    <p class="subtitle">Click each tile to see how math shows up in real life</p>
+  </header>
 
-<main class="infographic-grid">
+  <div class="grid">
 
-  <section class="flip-card top-card gaming" tabindex="0" onclick="flipCard(this)" onkeydown="flipWithKeyboard(event, this)">
-    <div class="flip-inner">
-      <div class="front" aria-label="Gaming and Leaderboards"></div>
-      <div class="back">
-        <h2>Gaming & Leaderboards</h2>
-        <p>Many video games use integers and fractions without you even noticing. Health points can go below zero, temperatures in survival games may use negative numbers, and upgrades often multiply damage by fractions or decimals. Order of operations helps players compare gear, plan strategies, and figure out how much XP they need to level up.</p>
-        <div class="tap-back">Click again to flip back.</div>
+    <!-- 1 -->
+    <div class="flip-card" onclick="flipCard(this)">
+      <div class="flip-inner">
+        <div class="front">
+          <img src="gaming.png">
+        </div>
+        <div class="back">
+          <h2>Gaming & Leaderboards</h2>
+          <p>Video games use integers, fractions, and order of operations constantly. Health can go below zero, upgrades multiply damage, and XP systems require calculations to level up and compare strategies.</p>
+        </div>
       </div>
     </div>
-  </section>
 
-  <section class="flip-card top-card sports" tabindex="0" onclick="flipCard(this)" onkeydown="flipWithKeyboard(event, this)">
-    <div class="flip-inner">
-      <div class="front" aria-label="Sports Statistics and Fantasy Leagues"></div>
-      <div class="back">
-        <h2>Sports Statistics & Fantasy Leagues</h2>
-        <p>Basketball shooting percentages, baseball batting averages, and football rankings all involve fractions and rational numbers. A player who makes 9 out of 12 shots has a shooting percentage based on fractions. Fantasy sports players compare stats, averages, and point totals to decide who to draft or trade.</p>
-        <div class="tap-back">Click again to flip back.</div>
+    <!-- 2 -->
+    <div class="flip-card" onclick="flipCard(this)">
+      <div class="flip-inner">
+        <div class="front">
+          <img src="sports.png">
+        </div>
+        <div class="back">
+          <h2>Sports Statistics & Fantasy Leagues</h2>
+          <p>Stats like shooting percentages and averages rely on fractions and rational numbers. Fantasy players compare numbers to make decisions.</p>
+        </div>
       </div>
     </div>
-  </section>
 
-  <section class="flip-card top-card shopping" tabindex="0" onclick="flipCard(this)" onkeydown="flipWithKeyboard(event, this)">
-    <div class="flip-inner">
-      <div class="front" aria-label="Money, Shopping, and Online Spending"></div>
-      <div class="back">
-        <h2>Money, Shopping & Online Spending</h2>
-        <p>Sales, discounts, taxes, and splitting costs with friends all use fractions and rational numbers. If a hoodie costs $48 and is 25% off, students can use fraction and order-of-operations skills to find the final price. Negative numbers also appear in bank balances, gift cards, and budgeting apps.</p>
-        <div class="tap-back">Click again to flip back.</div>
+    <!-- 3 -->
+    <div class="flip-card" onclick="flipCard(this)">
+      <div class="flip-inner">
+        <div class="front">
+          <img src="shopping.png">
+        </div>
+        <div class="back">
+          <h2>Money, Shopping & Online Spending</h2>
+          <p>Discounts, taxes, and budgets all involve rational numbers. Understanding percentages helps you find deals and manage money.</p>
+        </div>
       </div>
     </div>
-  </section>
 
-  <section class="flip-card bottom-left cooking" tabindex="0" onclick="flipCard(this)" onkeydown="flipWithKeyboard(event, this)">
-    <div class="flip-inner">
-      <div class="front" aria-label="Cooking, Baking, and Food Challenges"></div>
-      <div class="back">
-        <h2>Cooking, Baking & Food Challenges</h2>
-        <p>Recipes use fractions and mixed numbers all the time. If a recipe needs 1 1/2 cups of flour but you want to double it, you need operations with mixed numbers. Cooking videos and food trends often require adjusting recipes for different numbers of people.</p>
-        <div class="tap-back">Click again to flip back.</div>
+    <!-- 4 -->
+    <div class="flip-card" onclick="flipCard(this)">
+      <div class="flip-inner">
+        <div class="front">
+          <img src="cooking.png">
+        </div>
+        <div class="back">
+          <h2>Cooking, Baking & Food Challenges</h2>
+          <p>Recipes use fractions and mixed numbers. Adjusting serving sizes requires multiplying and dividing fractions.</p>
+        </div>
       </div>
     </div>
-  </section>
 
-  <section class="flip-card bottom-right technology" tabindex="0" onclick="flipCard(this)" onkeydown="flipWithKeyboard(event, this)">
-    <div class="flip-inner">
-      <div class="front" aria-label="Social Media, Content Creation, and Technology"></div>
-      <div class="back">
-        <h2>Social Media, Content Creation & Technology</h2>
-        <p>Content creators track follower growth, likes, and watch time using numbers, ratios, and averages. Video editing and music apps use timelines divided into fractions of seconds. GPS maps and weather apps use negative numbers and number lines to show location, elevation, and temperature.</p>
-        <div class="tap-back">Click again to flip back.</div>
+    <!-- 5 -->
+    <div class="flip-card" onclick="flipCard(this)">
+      <div class="flip-inner">
+        <div class="front">
+          <img src="technology.png">
+        </div>
+        <div class="back">
+          <h2>Creation & Technology</h2>
+          <p>Apps, video editing, and analytics use ratios, fractions, and number lines to measure time, growth, and performance.</p>
+        </div>
       </div>
     </div>
-  </section>
 
-</main>
-
-<footer>
-  Save this HTML file in the same folder as <strong>a_bright_educational_infographic_poster_composed.png</strong>.
-</footer>
+  </div>
+</div>
 
 <script>
-  function flipCard(card) {
-    card.classList.toggle('flipped');
-  }
-
-  function flipWithKeyboard(event, card) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      flipCard(card);
-    }
-  }
+function flipCard(card) {
+  card.classList.toggle("flipped");
+}
 </script>
 
 </body>
